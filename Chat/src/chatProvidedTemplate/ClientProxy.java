@@ -93,14 +93,7 @@ public class ClientProxy extends Thread
 			sgui.addMessage("<"+this.nick+">"+":"+buffer[1]);
 		break;
 		case "BYE":
-			try
-			{
-				System.out.println("Beende Verbindung!");
-				aSocket.close();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			beendeClientProxy();
 			break;
 		case "USR":
 			//TODO
@@ -139,7 +132,16 @@ public class ClientProxy extends Thread
 	}
 	protected void beendeClientProxy()
 	{
-		
+		try
+		{
+			System.out.println("Beende Verbindung!");
+			in.close();
+			out.close();
+			aSocket.close();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}		
 	}
 	
 	@Override

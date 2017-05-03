@@ -120,6 +120,7 @@ public class Client extends Thread
 			out.close();
 			in.close();
 			aSocket.close();
+			aClientGUI.dispose();
 		} catch (IOException e)
 		{
 			System.out.println("Fehler beim Schlieﬂen");
