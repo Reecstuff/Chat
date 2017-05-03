@@ -116,14 +116,6 @@ public class ClientProxy extends Thread
 	{
 		lt = LocalTime.now();		
 	}
-	protected void bearbeiteNachricht()
-	{
-		
-	}
-	protected void erstelleAblehnung()
-	{
-		
-	}
 	protected void beendeClientProxy()
 	{
 		try

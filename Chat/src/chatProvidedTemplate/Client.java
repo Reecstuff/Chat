@@ -94,10 +94,6 @@ public class Client extends Thread
 			return;
 		}
 	}
-	protected void abmelden()
-	{
-		
-	}
 	protected void erzeugeSocket(String ip, int port)
 	{
 		try
@@ -107,10 +103,6 @@ public class Client extends Thread
 		{
 			e.printStackTrace();
 		}		
-	}
-	protected void bearbeiteNachricht()
-	{
-		
 	}
 	protected void beendeClient()
 	{
