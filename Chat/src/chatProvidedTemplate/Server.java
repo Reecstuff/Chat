@@ -70,7 +70,7 @@ public class Server extends Thread
 		}
 		catch(IOException e)
 		{
-			e.printStackTrace();
+			interrupt();
 		}			
 	}
 	protected void verteileNachricht(String message)
@@ -108,6 +108,19 @@ public class Server extends Thread
 			cp.getNick();
 		}
 		
+	}
+	
+	@Override
+	public void interrupt()
+	{
+		super.interrupt();
+		try
+		{
+			aServerSocket.close();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void run()
