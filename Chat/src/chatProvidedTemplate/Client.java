@@ -114,7 +114,16 @@ public class Client extends Thread
 	}
 	protected void beendeClient()
 	{
-		
+		sendeNachricht("BYE");
+		try
+		{
+			out.close();
+			in.close();
+			aSocket.close();
+		} catch (IOException e)
+		{
+			System.out.println("Fehler beim Schlieﬂen");
+		}
 	}
 	@Override
 	public void run()

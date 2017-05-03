@@ -33,6 +33,7 @@ public class ClientGUI extends JFrame
 	private List nachrichtenliste;
 	private List nutzerliste;
 	private Label label_1;
+	private Button button;
 
 	/**
 	 * Launch the application.
@@ -118,6 +119,12 @@ public class ClientGUI extends JFrame
 		gbc_textFieldNick.gridx = 1;
 		gbc_textFieldNick.gridy = 3;
 		contentPane.add(getTextFieldNick(), gbc_textFieldNick);
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.fill = GridBagConstraints.BOTH;
+		gbc_button.insets = new Insets(0, 0, 5, 5);
+		gbc_button.gridx = 3;
+		gbc_button.gridy = 4;
+		contentPane.add(getButton(), gbc_button);
 		GridBagConstraints gbc_textFieldMessage = new GridBagConstraints();
 		gbc_textFieldMessage.insets = new Insets(0, 0, 0, 5);
 		gbc_textFieldMessage.fill = GridBagConstraints.HORIZONTAL;
@@ -215,10 +222,12 @@ public class ClientGUI extends JFrame
 	protected void sendMessage()
 	{
 		aClient.sendeNachricht("MSG"+"\u001e" + textFieldMessage.getText());
+		textFieldMessage.setText("");
 	}
 	protected void connect()
 	{
 		textFieldMessage.setEnabled(true);
+		button.setEnabled(true);
 		String array[] = new String[2];
 		aClient = new Client();
 		aClient.setaClientGUI(this);
@@ -238,5 +247,17 @@ public class ClientGUI extends JFrame
 	public void addMessage(String string)
 	{
 		nachrichtenliste.add(string);
+	}
+	private Button getButton() {
+		if (button == null) {
+			button = new Button("Stop");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					aClient.beendeClient();
+				}
+			});
+			button.setEnabled(false);
+		}
+		return button;
 	}
 }
