@@ -40,7 +40,7 @@ public class Client extends Thread
 				bestimmeKommando(message);
 			} catch (IOException e)
 			{
-				e.printStackTrace();
+				interrupt();
 			}
 		}
 	}
@@ -117,6 +117,7 @@ public class Client extends Thread
 		sendeNachricht("BYE");
 		try
 		{
+			interrupt();
 			out.close();
 			in.close();
 			aSocket.close();

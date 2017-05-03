@@ -207,7 +207,6 @@ public class ServerGUI extends JFrame
 	protected void addMessage(String message)
 	{
 		List.add(message);
-		aServer.verteileNachricht("MSG\u001e"+message);
 	}
 	protected void stoppeServer()
 	{

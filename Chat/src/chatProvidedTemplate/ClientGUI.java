@@ -215,6 +215,18 @@ public class ClientGUI extends JFrame
 		}
 		return label_1;
 	}
+	private Button getButton() {
+		if (button == null) {
+			button = new Button("Stop");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					aClient.beendeClient();
+				}
+			});
+			button.setEnabled(false);
+		}
+		return button;
+	}
 	public void addNachricht(String message)
 	{
 		nachrichtenliste.add(message);
@@ -247,17 +259,5 @@ public class ClientGUI extends JFrame
 	public void addMessage(String string)
 	{
 		nachrichtenliste.add(string);
-	}
-	private Button getButton() {
-		if (button == null) {
-			button = new Button("Stop");
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					aClient.beendeClient();
-				}
-			});
-			button.setEnabled(false);
-		}
-		return button;
 	}
 }

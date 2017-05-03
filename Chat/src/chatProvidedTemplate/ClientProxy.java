@@ -12,19 +12,13 @@ public class ClientProxy extends Thread
 	DataInputStream in;
 	DataOutputStream out;
 	String nick;
-	ServerGUI sgui;
 	LocalTime lt = null;
-		
-	public ClientProxy(ServerGUI sgui)
-	{
-		this.sgui = sgui;
-		start();
-	}
+	Server aServer;
 	
-	public ClientProxy(Socket s, ServerGUI sgui)
+	public ClientProxy(Socket s, Server aServer)
 	{
 		this.aSocket = s;
-		this.sgui = sgui;
+		this.aServer = aServer;
 		start();
 	}
 	public Socket getaSocket()
@@ -90,17 +84,17 @@ public class ClientProxy extends Thread
 		switch(buffer[0])
 		{
 		case "MSG":
-			sgui.addMessage("<"+this.nick+">"+":"+buffer[1]);
-		break;
+			aServer.verteileNachricht("<"+this.nick+">"+":"+buffer[1]);
+			break;
 		case "BYE":
 			beendeClientProxy();
 			break;
 		case "USR":
 			//TODO
-		break;
+			break;
 		case "NCK":
 			this.nick = buffer[1];
-		break;
+			break;
 		}
 	}
 
@@ -135,9 +129,11 @@ public class ClientProxy extends Thread
 		try
 		{
 			System.out.println("Beende Verbindung!");
+			interrupt();
 			in.close();
 			out.close();
 			aSocket.close();
+			aServer.entferneClient(this);
 		} catch (IOException e)
 		{
 			e.printStackTrace();

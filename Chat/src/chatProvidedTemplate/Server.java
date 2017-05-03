@@ -57,18 +57,14 @@ public class Server extends Thread
 		this.meldung = meldung;
 	}
 	
-	protected void aufnehmenClient()
-	{
-		
-	}
 	protected void warteAufClient()
 	{
 		try
 		{
 			while(!isInterrupted())
 			{
-				clientProxyList.add(new ClientProxy(aServerSocket.accept(), aServerGUI));
-				verteileNachricht("MSG\u001eNew arrival!");
+				clientProxyList.add(new ClientProxy(aServerSocket.accept(), this));
+				verteileNachricht("New arrival!");
 				System.out.println("Connection accepted");
 			}
 		}
@@ -79,14 +75,15 @@ public class Server extends Thread
 	}
 	protected void verteileNachricht(String message)
 	{
+		aServerGUI.addMessage(message);
 		for(ClientProxy cp: clientProxyList)
 		{
-			cp.sendeNachricht(message);
+			cp.sendeNachricht("MSG\u001e"+message);
 		}
 	}
-	protected void entferneClient()
+	protected void entferneClient(ClientProxy cproxy)
 	{
-		
+		clientProxyList.remove(clientProxyList.indexOf(cproxy));
 	}
 	protected void starteServer()
 	{
@@ -103,10 +100,6 @@ public class Server extends Thread
 		aServerSocket = null;
 		clientProxyList.clear();
 		this.interrupt();
-	}
-	protected void pruefeAnmeldung()
-	{
-		
 	}
 	protected void erstelleUserListe()
 	{
