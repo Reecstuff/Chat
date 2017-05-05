@@ -108,7 +108,8 @@ public class Server extends Thread
 		buffer.append("USR");
 		for(ClientProxy cp : clientProxyList)
 		{
-			buffer.append("\u001e"+cp.getNick());			
+			buffer.append("\u001e");
+			buffer.append(cp.getNick());
 		}
 		return buffer.toString();
 	}
