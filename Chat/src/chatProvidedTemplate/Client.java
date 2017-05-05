@@ -65,7 +65,10 @@ public class Client extends Thread
 			}
 			break;
 		case "USR":
-			//TODO
+			for(int i = 1; i < buffer.length; i++)
+			{
+				aClientGUI.addUser(buffer[i]);
+			}
 		break;
 		}
 	}
@@ -76,11 +79,9 @@ public class Client extends Thread
 			out = new DataOutputStream(aSocket.getOutputStream());
 			out.writeUTF(string);
 		} catch (IOException e)
-		{}		
-	}
-	protected void zeigeNachricht()
-	{
-		
+		{
+			System.out.print("Fehler beim schreiben!");
+		}		
 	}
 	protected void anmelden(String ip, int port)
 	{

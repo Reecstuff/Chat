@@ -169,7 +169,7 @@ public class ClientGUI extends JFrame
 			textField = new TextField();
 			textField.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					buttonStart.setEnabled(true);
+					
 				}
 			});
 		}
@@ -186,17 +186,12 @@ public class ClientGUI extends JFrame
 			textFieldNick = new TextField();
 			textFieldNick.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					sendeNickname();
+					buttonStart.setEnabled(true);
 				}
 			});
 		}
 		return textFieldNick;
 	}
-	protected void sendeNickname()
-	{
-		aClient.sendeNachricht("NCK"+ "\u001e" + textFieldNick.getText());
-	}
-
 	private List getNachrichtenliste() {
 		if (nachrichtenliste == null) {
 			nachrichtenliste = new List();
@@ -254,10 +249,18 @@ public class ClientGUI extends JFrame
 			return;
 		}
 		aClient.start();
+		sendeNickname();
 	}
-
+	protected void sendeNickname()
+	{
+		aClient.sendeNachricht("NCK"+ "\u001e" + textFieldNick.getText());
+	}
 	public void addMessage(String string)
 	{
 		nachrichtenliste.add(string);
+	}
+	public void addUser(String string)
+	{
+		nutzerliste.add(string);
 	}
 }

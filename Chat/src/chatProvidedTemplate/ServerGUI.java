@@ -16,8 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ServerGUI extends JFrame
-{
-	Server aServer;
+{Server aServer;
 	/**
 	 * 
 	 */

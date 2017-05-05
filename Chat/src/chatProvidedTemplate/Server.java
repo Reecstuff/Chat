@@ -101,15 +101,17 @@ public class Server extends Thread
 		clientProxyList.clear();
 		this.interrupt();
 	}
-	protected void erstelleUserListe()
+	
+	protected String erstelleUserListe()
 	{
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("USR");
 		for(ClientProxy cp : clientProxyList)
 		{
-			cp.getNick();
+			buffer.append("\u001e"+cp.getNick());			
 		}
-		
+		return buffer.toString();
 	}
-	
 	@Override
 	public void interrupt()
 	{

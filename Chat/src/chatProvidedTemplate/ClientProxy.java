@@ -89,11 +89,9 @@ public class ClientProxy extends Thread
 		case "BYE":
 			beendeClientProxy();
 			break;
-		case "USR":
-			//TODO
-			break;
 		case "NCK":
 			this.nick = buffer[1];
+			sendeNachricht(aServer.erstelleUserListe());
 			break;
 		}
 	}
