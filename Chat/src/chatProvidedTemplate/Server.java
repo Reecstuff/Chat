@@ -129,6 +129,5 @@ public class Server extends Thread
 	public void run()
 	{
 		warteAufClient();
-		//baskfddkjfhkj
 	}
 }
