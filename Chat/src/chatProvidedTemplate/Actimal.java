@@ -1,5 +1,7 @@
 package chatProvidedTemplate;
 
+import java.net.SocketPermission;
+import java.security.Permission;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Hashtable;
@@ -36,4 +38,8 @@ public class Actimal extends SecurityManager
 			}			
 		}
 	}
+
+	@Override
+	public void checkPermission(Permission perm) { }
+	
 }
