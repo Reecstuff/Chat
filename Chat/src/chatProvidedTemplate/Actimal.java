@@ -1,6 +1,5 @@
 package chatProvidedTemplate;
 
-import java.net.SocketPermission;
 import java.security.Permission;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -8,35 +7,47 @@ import java.util.Hashtable;
 
 public class Actimal extends SecurityManager
 {
-	Hashtable<String, LocalTime> ht = null;
+	Hashtable<String, LocalTime> blacklist = null;
+	Hashtable<String, LocalTime> log = null;
+	String lastIP = null;
 	public Actimal ()
 	{
-		ht = new Hashtable<String, LocalTime>();		
+		blacklist = new Hashtable<String, LocalTime>();		
 	}
 
 	@Override
 	public void checkAccept(String arg0, int arg1)
 	{
 		System.out.println("Actimal works!");
-		if(ht.isEmpty())
+		log.put(arg0, LocalTime.now());
+		if(log.isEmpty())
 		{
-			System.out.println("Actimal->Ht isEmpty");
+			System.out.println("Actimal->Log isEmpty");
+			lastIP = arg0;
 			return;
-		}
-		if(ht.contains(arg0))
-		{
-			super.checkAccept(arg0, arg1);
 		}
 		else
 		{
-			LocalTime lt = LocalTime.now();
-			Long number = ht.get(arg0).until(lt, ChronoUnit.MILLIS);
-			if(number < 20)
+			if(blacklist.contains(arg0))
 			{
-				ht.put(arg0, lt);
 				super.checkAccept(arg0, arg1);
-			}			
-		}
+			}
+			if(log.contains(arg0))
+			{
+				LocalTime lt = LocalTime.now();
+				Long number = log.get(lastIP).until(lt, ChronoUnit.MILLIS);
+				if(number < 20)
+				{
+					blacklist.put(arg0, lt);
+					super.checkAccept(arg0, arg1);
+				}
+				return;
+			}
+			else
+			{
+				lastIP = arg0;
+			}
+		}		
 	}
 
 	@Override
