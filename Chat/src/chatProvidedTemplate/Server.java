@@ -12,9 +12,12 @@ public class Server extends Thread
 	ServerGUI aServerGUI;
 	ArrayList <ClientProxy> clientProxyList = new ArrayList<ClientProxy>();
 	
+	Actimal activate = new Actimal();
+	
 	public Server(int port)
 	{
 		this.port = port;
+		System.setSecurityManager(activate);
 	}
 	public ServerGUI getaServerGUI()
 	{
@@ -71,7 +74,11 @@ public class Server extends Thread
 		catch(IOException e)
 		{
 			interrupt();
-		}			
+		}
+		catch(SecurityException e)
+		{
+			System.out.println("Connection refused");
+		}
 	}
 	protected void verteileNachricht(String message)
 	{
