@@ -9,7 +9,7 @@ public class Actimal extends SecurityManager
 {
 	Hashtable<String, LocalTime> blacklist = null;
 	Hashtable<String, LocalTime> log = null;
-	String lastIP = null;
+	String lastIP = "";
 	public Actimal ()
 	{
 		blacklist = new Hashtable<String, LocalTime>();		
@@ -21,34 +21,34 @@ public class Actimal extends SecurityManager
 	{
 		System.out.println("Actimal works!");
 		log.put(arg0, LocalTime.now());
-		if(log.isEmpty())
+		
+		if(blacklist.containsKey(arg0))
 		{
-			System.out.println("Actimal->Log isEmpty");
-			lastIP = arg0;
-			return;
+			throw new SecurityException();
+			//super.checkAccept(arg0, arg1);
 		}
 		else
 		{
-			if(blacklist.contains(arg0))
-			{
-				super.checkAccept(arg0, arg1);
-			}
-			if(log.contains(arg0))
+						
+			if(lastIP.equals(arg0))
 			{
 				LocalTime lt = LocalTime.now();
 				Long number = log.get(lastIP).until(lt, ChronoUnit.MILLIS);
 				if(number < 20)
 				{
 					blacklist.put(arg0, lt);
-					super.checkAccept(arg0, arg1);
+					throw new SecurityException();
+					//super.checkAccept(arg0, arg1);
+					
 				}
 				return;
 			}
-			else
-			{
-				lastIP = arg0;
-			}
-		}		
+			
+			lastIP = arg0;
+		}
+		
+		
+			
 	}
 
 	@Override
