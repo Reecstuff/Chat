@@ -127,7 +127,7 @@ public class ServerGUI extends JFrame
 		}
 		return labelNachrichten;
 	}
-	private java.awt.List getTextArea() {
+	public java.awt.List getTextArea() {
 		if (List == null) {
 			List = new java.awt.List();
 		}

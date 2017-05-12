@@ -14,6 +14,8 @@ public class Server extends Thread
 	
 	Actimal activate = new Actimal();
 	
+	int listtick = 0;
+	
 	public Server(int port)
 	{
 		this.port = port;
@@ -83,6 +85,7 @@ public class Server extends Thread
 	protected void verteileNachricht(String message)
 	{
 		aServerGUI.addMessage(message);
+		tick();
 		for(ClientProxy cp: clientProxyList)
 		{
 			cp.sendeNachricht("MSG\u001e"+message);
@@ -136,5 +139,16 @@ public class Server extends Thread
 	public void run()
 	{
 		warteAufClient();
+	}
+	
+	private void tick()
+	{
+		if(listtick >= 100)
+		{
+			aServerGUI.getTextArea().removeAll();
+			listtick = 0;
+		}
+		
+		listtick++;
 	}
 }
