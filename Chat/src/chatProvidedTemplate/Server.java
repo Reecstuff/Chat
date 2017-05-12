@@ -21,6 +21,9 @@ public class Server extends Thread
 		this.port = port;
 		System.setSecurityManager(activate);
 	}
+	public Actimal getActivate() {
+		return activate;
+	}
 	public ServerGUI getaServerGUI()
 	{
 		return aServerGUI;
@@ -79,7 +82,7 @@ public class Server extends Thread
 		}
 		catch(SecurityException e)
 		{
-			System.out.println("Connection refused");
+			System.out.println("Actimal activated");
 		}
 	}
 	protected void verteileNachricht(String message)
