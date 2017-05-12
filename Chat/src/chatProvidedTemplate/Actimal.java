@@ -13,6 +13,7 @@ public class Actimal extends SecurityManager
 	public Actimal ()
 	{
 		blacklist = new Hashtable<String, LocalTime>();		
+		log = new Hashtable<String, LocalTime>();
 	}
 
 	@Override
