@@ -66,10 +66,11 @@ public class ClientProxy extends Thread
 		{
 			try
 			{
-				aServer.getActivate().checkSpamattack(aSocket.getInetAddress().toString());
+				
 				String message = in.readUTF();
-				if(message != null)
+				if(message != null || message.equals("MSG\u001e") != true)
 				{
+					aServer.getActivate().checkSpamattack(aSocket.getInetAddress().toString());
 					bestimmeKommando(message);
 				}
 			}
