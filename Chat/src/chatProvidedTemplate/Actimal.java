@@ -10,6 +10,7 @@ public class Actimal extends SecurityManager
 	Hashtable<String, LocalTime> blacklist = null;
 	Hashtable<String, LocalTime> log = null;
 	String lastIP = "";
+	LocalTime lastmessage = LocalTime.now();
 	public Actimal ()
 	{
 		blacklist = new Hashtable<String, LocalTime>();		
@@ -53,5 +54,20 @@ public class Actimal extends SecurityManager
 
 	@Override
 	public void checkPermission(Permission perm) { }
+	
+	public void checkSpamattack(String IP)
+	{
+		LocalTime messagetime = LocalTime.now();
+		Long check = lastmessage.until(messagetime, ChronoUnit.MILLIS);
+		
+		if(check < 20)
+		{
+			blacklist.put(IP, messagetime);
+			
+			throw new SecurityException();
+		}
+		
+		lastmessage = messagetime;
+	}
 	
 }
