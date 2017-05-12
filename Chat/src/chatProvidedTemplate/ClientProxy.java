@@ -13,10 +13,10 @@ public class ClientProxy extends Thread
 	DataOutputStream out;
 	String nick;
 	LocalTime lt = null;
-	Server aServer;
+	Server aServer;	
 	
 	public ClientProxy(Socket s, Server aServer)
-	{
+	{		
 		this.aSocket = s;
 		this.aServer = aServer;
 		start();
@@ -66,6 +66,7 @@ public class ClientProxy extends Thread
 		{
 			try
 			{
+				aServer.getActivate().checkSpamattack(aSocket.getInetAddress().toString());
 				String message = in.readUTF();
 				if(message != null)
 				{
@@ -75,6 +76,11 @@ public class ClientProxy extends Thread
 			catch(IOException e)
 			{
 				interrupt();
+			}
+			catch(SecurityException e)
+			{
+				System.out.println("Spamshield activated");
+				beendeClientProxy();				
 			}
 		}
 	}
