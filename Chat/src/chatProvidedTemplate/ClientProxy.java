@@ -68,9 +68,9 @@ public class ClientProxy extends Thread
 			{
 				
 				String message = in.readUTF();
-				if(message != null || message.equals("MSG\u001e") != true)
+				if(message != null)
 				{
-					aServer.getActivate().checkSpamattack(aSocket.getInetAddress().toString());
+					aServer.getActivate().checkSpamAttack(aSocket.getInetAddress().toString());
 					bestimmeKommando(message);
 				}
 			}
@@ -91,6 +91,7 @@ public class ClientProxy extends Thread
 		switch(buffer[0])
 		{
 		case "MSG":
+			//Hier Bedingunen einfügen
 			aServer.verteileNachricht("<"+this.nick+">"+":"+buffer[1]);
 			break;
 		case "BYE":
