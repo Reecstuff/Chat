@@ -26,11 +26,10 @@ public class Actimal extends SecurityManager
 		if(blacklist.containsKey(arg0))
 		{
 			throw new SecurityException();
-			//super.checkAccept(arg0, arg1);
+
 		}
 		else
 		{
-						
 			if(lastIP.equals(arg0))
 			{
 				LocalTime lt = LocalTime.now();
@@ -39,7 +38,6 @@ public class Actimal extends SecurityManager
 				{
 					blacklist.put(arg0, lt);
 					throw new SecurityException();
-					//super.checkAccept(arg0, arg1);
 					
 				}
 				return;
@@ -52,7 +50,7 @@ public class Actimal extends SecurityManager
 	@Override
 	public void checkPermission(Permission perm) { }
 	
-	public void checkSpamattack(String IP)
+	public void checkSpamAttack(String IP)
 	{
 		LocalTime messagetime = LocalTime.now();
 		if(lastmessage != null)
@@ -68,6 +66,25 @@ public class Actimal extends SecurityManager
 		}
 						
 		lastmessage = messagetime;
+	}
+	
+	public void addToBlacklist(String IP)
+	{
+		blacklist.put(IP, LocalTime.now());
+	}
+	
+	public boolean buffercheck(String buffer[], String IP)
+	{
+		if(buffer.length > 1)
+		{
+			return true;
+		}
+		
+		else
+		{
+			addToBlacklist(IP);
+			return false;
+		}
 	}
 	
 }
