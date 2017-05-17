@@ -41,11 +41,7 @@ public class Actimal extends SecurityManager
 				return;
 			}			
 			lastIP = arg0;
-<<<<<<< HEAD
 		}
-=======
-		}							
->>>>>>> branch 'master' of https://github.com/JumpingScript/Chat.git
 	}
 
 	@Override
