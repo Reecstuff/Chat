@@ -47,9 +47,6 @@ public class Actimal extends SecurityManager
 			
 			lastIP = arg0;
 		}
-		
-		
-			
 	}
 
 	@Override
