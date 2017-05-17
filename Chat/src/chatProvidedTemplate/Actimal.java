@@ -26,7 +26,6 @@ public class Actimal extends SecurityManager
 		if(blacklist.containsKey(arg0))
 		{
 			throw new SecurityException();
-
 		}
 		else
 		{
@@ -37,17 +36,12 @@ public class Actimal extends SecurityManager
 				if(number < 20)
 				{
 					blacklist.put(arg0, lt);
-					throw new SecurityException();
-					
+					throw new SecurityException();					
 				}
 				return;
-			}
-			
+			}			
 			lastIP = arg0;
-		}
-		
-		
-			
+		}							
 	}
 
 	@Override
@@ -56,6 +50,10 @@ public class Actimal extends SecurityManager
 	public void checkSpamAttack(String IP)
 	{
 		LocalTime messagetime = LocalTime.now();
+		if(blacklist.containsKey(IP))
+		{
+			throw new SecurityException();
+		}
 		if(lastmessage != null)
 		{
 			Long check = lastmessage.until(messagetime, ChronoUnit.MILLIS);
@@ -78,6 +76,7 @@ public class Actimal extends SecurityManager
 	
 	public boolean buffercheck(String buffer[], String IP)
 	{
+		System.out.println("Buffer checked");
 		if(buffer.length > 1)
 		{
 			return true;
