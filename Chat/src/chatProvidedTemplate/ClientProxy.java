@@ -94,8 +94,7 @@ public class ClientProxy extends Thread
 			if(aServer.getActivate().buffercheck(buffer, aSocket.getInetAddress().toString()))
 			{
 				aServer.verteileNachricht("<"+this.nick+">"+":"+buffer[1]);
-			}
-									
+			}									
 			break;
 		case "BYE":
 			beendeClientProxy();
@@ -105,8 +104,7 @@ public class ClientProxy extends Thread
 			{
 				this.nick = buffer[1];
 				sendeNachricht(aServer.erstelleUserListe());
-			}			
-			
+			}						
 			break;
 		}
 	}
