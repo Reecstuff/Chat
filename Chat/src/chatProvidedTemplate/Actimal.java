@@ -71,4 +71,23 @@ public class Actimal extends SecurityManager
 		lastmessage = messagetime;
 	}
 	
+	public void addToBlacklist(String IP)
+	{
+		blacklist.put(IP, LocalTime.now());
+	}
+	
+	public boolean buffercheck(String buffer[], String IP)
+	{
+		if(buffer.length > 1)
+		{
+			return true;
+		}
+		
+		else
+		{
+			addToBlacklist(IP);
+			return false;
+		}
+	}
+	
 }

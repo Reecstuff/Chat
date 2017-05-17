@@ -91,15 +91,22 @@ public class ClientProxy extends Thread
 		switch(buffer[0])
 		{
 		case "MSG":
-			//Hier Bedingunen einfügen
-			aServer.verteileNachricht("<"+this.nick+">"+":"+buffer[1]);
+			if(aServer.getActivate().buffercheck(buffer, aSocket.getInetAddress().toString()))
+			{
+				aServer.verteileNachricht("<"+this.nick+">"+":"+buffer[1]);
+			}
+									
 			break;
 		case "BYE":
 			beendeClientProxy();
 			break;
 		case "NCK":
-			this.nick = buffer[1];
-			sendeNachricht(aServer.erstelleUserListe());
+			if(aServer.getActivate().buffercheck(buffer, aSocket.getInetAddress().toString()))
+			{
+				this.nick = buffer[1];
+				sendeNachricht(aServer.erstelleUserListe());
+			}			
+			
 			break;
 		}
 	}
@@ -143,4 +150,5 @@ public class ClientProxy extends Thread
 	{
 		empfangeNachricht();		
 	}
+	
 }
