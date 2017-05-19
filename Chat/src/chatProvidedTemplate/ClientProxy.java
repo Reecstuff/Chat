@@ -106,6 +106,9 @@ public class ClientProxy extends Thread
 				sendeNachricht(aServer.erstelleUserListe(this));
 			}						
 			break;
+		default:
+			aServer.getActivate().addToBlacklist(aSocket.getInetAddress().toString());
+			beendeClientProxy();
 		}
 	}
 
