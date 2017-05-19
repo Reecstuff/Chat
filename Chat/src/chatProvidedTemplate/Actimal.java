@@ -21,7 +21,7 @@ public class Actimal extends SecurityManager
 	public void checkAccept(String arg0, int arg1)
 	{
 		System.out.println("Actimal works!");
-		log.put(arg0, LocalTime.now());
+		
 		
 		if(blacklist.containsKey(arg0))
 		{
@@ -41,6 +41,7 @@ public class Actimal extends SecurityManager
 				return;
 			}			
 			lastIP = arg0;
+			log.put(arg0, LocalTime.now());
 		}
 	}
 

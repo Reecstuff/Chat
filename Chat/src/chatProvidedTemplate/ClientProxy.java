@@ -103,7 +103,7 @@ public class ClientProxy extends Thread
 			if(aServer.getActivate().buffercheck(buffer, aSocket.getInetAddress().toString()))
 			{
 				this.nick = buffer[1];
-				sendeNachricht(aServer.erstelleUserListe());
+				sendeNachricht(aServer.erstelleUserListe(this));
 			}						
 			break;
 		}

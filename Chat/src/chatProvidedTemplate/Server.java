@@ -115,15 +115,20 @@ public class Server extends Thread
 		this.interrupt();
 	}
 	
-	protected String erstelleUserListe()
+	protected String erstelleUserListe(ClientProxy proxy)
 	{
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("USR");
 		for(ClientProxy cp : clientProxyList)
 		{
-			buffer.append("\u001e");
-			buffer.append(cp.getNick());
+			if(!cp.equals(proxy))
+			{
+				cp.sendeNachricht("USR\u001e"+ proxy.getNick());
+				buffer.append("\u001e");
+				buffer.append(cp.getNick());
+			}
 		}
+		
 		return buffer.toString();
 	}
 	@Override
