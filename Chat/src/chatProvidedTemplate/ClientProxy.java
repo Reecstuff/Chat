@@ -70,7 +70,9 @@ public class ClientProxy extends Thread
 				String message = in.readUTF();
 				if(message != null)
 				{
+					//new
 					aServer.getActivate().checkSpamAttack(aSocket.getInetAddress().toString());
+					//end new
 					bestimmeKommando(message);
 				}
 			}
@@ -78,11 +80,13 @@ public class ClientProxy extends Thread
 			{
 				interrupt();
 			}
+			//new
 			catch(SecurityException e)
 			{
 				System.out.println("Spamshield activated");
 				beendeClientProxy();				
 			}
+			//end new
 		}
 	}
 	private void bestimmeKommando(String message)
@@ -91,24 +95,30 @@ public class ClientProxy extends Thread
 		switch(buffer[0])
 		{
 		case "MSG":
+			//new
 			if(aServer.getActivate().buffercheck(buffer, aSocket.getInetAddress().toString()))
 			{
 				aServer.verteileNachricht("<"+this.nick+">"+":"+buffer[1]);
-			}									
+			}	
+			//end new
 			break;
 		case "BYE":
 			beendeClientProxy();
 			break;
 		case "NCK":
+			//new
 			if(aServer.getActivate().buffercheck(buffer, aSocket.getInetAddress().toString()))
 			{
 				this.nick = buffer[1];
 				sendeNachricht(aServer.erstelleUserListe(this));
-			}						
+			}	
+			//end new
 			break;
 		default:
+			//new
 			aServer.getActivate().addToBlacklist(aSocket.getInetAddress().toString());
 			beendeClientProxy();
+			//end new
 		}
 	}
 

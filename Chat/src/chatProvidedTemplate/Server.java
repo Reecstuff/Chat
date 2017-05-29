@@ -12,18 +12,24 @@ public class Server extends Thread
 	ServerGUI aServerGUI;
 	ArrayList <ClientProxy> clientProxyList = new ArrayList<ClientProxy>();
 	
+	//new
 	Actimal activate = new Actimal();
+	//end new
 	
 	int listtick = 0;
 	
 	public Server(int port)
 	{
 		this.port = port;
+		//new
 		System.setSecurityManager(activate);
+		//end new
 	}
+	//new
 	public Actimal getActivate() {
 		return activate;
 	}
+	//end new
 	public ServerGUI getaServerGUI()
 	{
 		return aServerGUI;
@@ -80,10 +86,12 @@ public class Server extends Thread
 		{
 			interrupt();
 		}
+		//new
 		catch(SecurityException e)
 		{
 			System.out.println("Actimal activated");
 		}
+		//end new
 	}
 	protected void verteileNachricht(String message)
 	{
